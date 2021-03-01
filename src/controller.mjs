@@ -1,6 +1,7 @@
 export default class Controller {
-  constructor({ view }) {
+  constructor({ view, media }) {
     this.view = view;
+    this.media = media;
   }
 
   static initialize(dependencies) {
@@ -10,10 +11,10 @@ export default class Controller {
   }
 
   _init() {
-    this.viewconfigureStartRecordingButton(this.onStartRecording.bind(this));
+    this.view.configureStartRecordingButton(this.onStartRecording.bind(this));
   }
 
   async onStartRecording() {
-    alert('iniciou gravação');
+    const audioStream = await this.media.getAudio();
   }
 } 
