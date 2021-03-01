@@ -8,6 +8,9 @@
 
 - When you click start recording it'll record your voice and then play it .
 
+## Credits to project
+
+Thanks [Erick Wendel](https://github.com/ErickWendel)
 
 ## Credits
 
