@@ -10,7 +10,7 @@ export default class Recorder {
     const isSurpported = MediaRecorder.isTypeSurpported(options);
 
     if (!isSurpported) {
-      const msg = `the codec: ${mimeType} is not supported!`;
+      const msg = `the codec: ${options.mimeType} is not supported!`;
       alert(msg);
 
       throw new Error(msg);
@@ -21,7 +21,7 @@ export default class Recorder {
 
   startRecording(stream) {
     const options = this._setup();
-    this.mediaRecorder = new MediaRecorder(stream, options);
+    this.mediaRecorder = new MediaRecorder(stream, options.mimeType);
 
     this.mediaRecorder.onstop = (event) => {
       console.log('Recorded Blobs', this.recordedBlobs);
@@ -40,5 +40,10 @@ export default class Recorder {
     if (this.mediaRecorder.state === 'inactive') return;
 
     this.mediaRecorder.stop();
+  }
+
+  getRecordingURL() { 
+    const blob = new Blob(this.recordedBlobs, { type: this.audioType });
+    return window.URL.createObjectURL(blob);
   }
 }
